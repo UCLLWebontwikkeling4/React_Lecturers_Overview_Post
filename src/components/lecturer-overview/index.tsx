@@ -24,7 +24,7 @@ const LecturerOverview: React.FC = () => {
                 lecturers={lecturers}
                 setSelectedLecturer={setSelectedLecturer}
             />
-            {selectedLecturer && selectedLecturer.courses && (
+            {selectedLecturer && selectedLecturer.courses?.length && (
                 <CoursesOverviewTable courses={selectedLecturer.courses} />
             )}
         </section>
