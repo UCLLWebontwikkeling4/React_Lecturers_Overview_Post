@@ -86,7 +86,11 @@ const LecturerAdd: React.FC = () => {
             </div>
             <div className="w-100 d-none d-md-block" />
             {allCourses && (
-                <CoursesOverviewTable courses={allCourses} onChange={handleChangeSelectedCourses} />
+                <CoursesOverviewTable
+                    courses={allCourses}
+                    onChange={handleChangeSelectedCourses}
+                    clickable
+                />
             )}
         </section>
     );

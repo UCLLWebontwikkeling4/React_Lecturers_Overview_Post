@@ -1,12 +1,14 @@
+import classNames from 'classnames';
 import React, { useState, useEffect } from 'react';
 import { Course } from '../../types';
 
 type Props = {
     courses: Course[];
     onChange?: (selectedCourses: Course[]) => void;
+    clickable?: boolean;
 };
 
-const CoursesOverviewTable: React.FC<Props> = ({ courses, onChange }: Props) => {
+const CoursesOverviewTable: React.FC<Props> = ({ courses, onChange, clickable = false }: Props) => {
     const [selectedCourses, setSelectedCourses] = useState<Course[]>([]);
 
     // Side effect: when state changes (selectedCourses) by selecting in the table,
@@ -28,7 +30,7 @@ const CoursesOverviewTable: React.FC<Props> = ({ courses, onChange }: Props) => 
 
     return (
         <div className="col-8">
-            <table className="table table-hover">
+            <table className={classNames('table', { 'table-hover': clickable })}>
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -44,8 +46,12 @@ const CoursesOverviewTable: React.FC<Props> = ({ courses, onChange }: Props) => 
                             <tr
                                 className={selectedCourses.includes(course) ? 'table-active' : ''}
                                 key={index}
-                                onClick={() => handleOnClick(course)}
-                                role="button"
+                                onClick={() => {
+                                    if (clickable) {
+                                        handleOnClick(course);
+                                    }
+                                }}
+                                role={clickable ? 'button' : ''}
                             >
                                 <td>{course.name}</td>
                                 <td>{course.description}</td>
