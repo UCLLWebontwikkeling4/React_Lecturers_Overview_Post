@@ -26,19 +26,17 @@ const LecturerAdd: React.FC = () => {
     };
 
     const addLecturer = async (lecturerInput: Lecturer) => {
-        if (lecturerInput) {
-            const res: AxiosResponse<Response> = await LecturerService.addLecturer(lecturerInput);
-            const { errorMessage } = res.data;
+        const res: AxiosResponse<Response> = await LecturerService.addLecturer(lecturerInput);
+        const { errorMessage } = res.data;
 
-            if (errorMessage) {
-                setStatusMessages([...statusMessages, { message: errorMessage, type: 'error' }]);
-            } else {
-                setStatusMessages([
-                    { message: `Lecturer ${nameInput} successfully added.`, type: 'success' },
-                ]);
-                setNameInput('');
-                setSelectedCourses([]);
-            }
+        if (errorMessage) {
+            setStatusMessages([...statusMessages, { message: errorMessage, type: 'error' }]);
+        } else {
+            setStatusMessages([
+                { message: `Lecturer ${nameInput} successfully added.`, type: 'success' },
+            ]);
+            setNameInput('');
+            setSelectedCourses([]);
         }
     };
 
