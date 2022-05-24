@@ -4,6 +4,7 @@ import LecturerService from '../../services/LecturerService';
 import { Lecturer } from '../../types';
 import CoursesOverviewTable from '../courses-overview-table';
 import LecturersOverviewTable from './LecturersOverviewTable';
+import useInterval from 'use-interval';
 
 const LecturerOverview: React.FC = () => {
     const [lecturers, setLecturers] = useState<Lecturer[]>([]);
@@ -12,6 +13,10 @@ const LecturerOverview: React.FC = () => {
     useEffect(() => {
         getLecturers();
     }, []);
+
+    useInterval(() => {
+        getLecturers();
+    }, 1000);
 
     const getLecturers = async () => {
         const res: AxiosResponse<Lecturer[]> = await LecturerService.getAllLecturers();
